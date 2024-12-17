@@ -1,0 +1,89 @@
+.git
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependencies
+node_modules
+
+# Dev/Build Artifacts
+dist
+dist-ssr
+coverage
+*.local
+/tests/e2e/videos/
+/tests/e2e/screenshots/
+/tests/unit/coverage/
+jsconfig.json
+
+# Local Env Files
+.env*
+
+# Editor directories and files
+.vscode
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Ignore docker files
+docker-compose*
+Dockerfile*
+
+# Ignore task files
+Taskfile.yml
+.tasks
+charts/
+
+# Cache
+.eslintcache
+.husky
+
+
+# parcel-bundler cache (https://parceljs.org/)
+.cache
+
+# next.js build output
+.next
+
+# nuxt.js build output
+.nuxt
+
+# Nuxt generate
+dist
+
+# vuepress build output
+.vuepress/dist
+
+# Serverless directories
+.serverless
+
+# IDE / Editor
+.idea
+
+# Service worker
+sw.*
+
+# macOS
+.DS_Store
+
+# Vim swap files
+*.swp
+.vscode/
+
+*.session.sql
+deploy*.sh
+*.md
+/*.tar.gz

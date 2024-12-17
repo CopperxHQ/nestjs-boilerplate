@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "davidanson.vscode-markdownlint",
+    "esbenp.prettier-vscode",
+    "mrmlnc.vscode-scss",
+    "editorconfig.editorconfig",
+    "wayou.vscode-todo-highlight",
+    "firsttris.vscode-jest-runner",
+    "ms-azuretools.vscode-docker"
+  ]
+}

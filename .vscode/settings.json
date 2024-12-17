@@ -1,0 +1,94 @@
+{
+  // ===
+  // Files
+  // ===
+  "files.exclude": {
+    "**/*.log": true,
+    "**/*.log*": true,
+    "**/*.back": true,
+    "**/dist": true,
+    "**/coverage": true,
+    "**/.next": true,
+    "**/build": true
+  },
+  "files.associations": {
+    ".markdownlintrc": "jsonc"
+  },
+  // ===
+  // Event Triggers
+  // ===
+  "editor.linkedEditing": true,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.stylelint": "never",
+    "source.fixAll.markdownlint": "explicit"
+  },
+  "eslint.enable": true,
+  "eslint.useESLintClass": true,
+  "eslint.options": {
+    "extensions": [".js", ".jsx", ".mdx", ".ts", ".tsx", ".vue", ".json"]
+  },
+  "eslint.debug": false,
+  "eslint.lintTask.enable": false,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "vue",
+    "vue-html",
+    "html",
+    "mdx",
+    "typescript",
+    "typescriptreact"
+  ],
+  "eslint.format.enable": false,
+  // "prettier.disableLanguages": [],
+  // ===
+  // HTML
+  // ===
+  "html.autoClosingTags": true,
+  "html.format.enable": false,
+  "emmet.triggerExpansionOnTab": true,
+  // ===
+  // JS(ON)
+  // ===
+  "javascript.format.enable": false,
+  "json.format.enable": false,
+  // ===
+  // CSS
+  // ===
+  "css.validate": true,
+  "scss.validate": true,
+  // ===
+  // MARKDOWN
+  // ===
+  "[markdown]": {
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wordWrapColumn": 120
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "tailwindCSS.experimental.classRegex": [
+    "tw`([^`]*)", // tw`...`
+    "tw=\"([^\"]*)", // <div tw="..." />
+    "tw='([^']*)", // <div tw='...' />
+    "tw={\"([^\"}]*)", // <div tw={"..."} />
+    "tw={'([^'}]*)", // <div tw={'...'} />
+    "tw\\.\\w+`([^`]*)", // tw.xxx`...`
+    "tw\\(.*?\\)`([^`]*)" // tw(Component)`...`
+  ],
+  "tailwindCSS.includeLanguages": {
+    "typescript": "javascript",
+    "typescriptreact": "javascript"
+  }
+}

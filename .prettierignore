@@ -1,0 +1,14 @@
+# Ignore artifacts:
+build
+coverage
+package-lock.json
+.next
+out
+dist
+
+# Ignore non source files
+coverage
+node_modules
+charts
+.tasks
+Taskfile.yml
