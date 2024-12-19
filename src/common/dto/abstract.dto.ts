@@ -3,7 +3,7 @@ import { AbstractEntity } from '../entities/abstract.entity';
 
 export abstract class AbstractDto {
   @ApiProperty()
-  id: number;
+  id: string;
 
   @ApiProperty()
   createdAt: Date;

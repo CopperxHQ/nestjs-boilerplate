@@ -5,9 +5,12 @@ import { HealthModule } from './health/health.module';
 import { AppController } from './app.controller';
 import { LoggerModule } from 'nestjs-pino';
 import { createConfig } from './common/logger/create-logger-pino';
+import { DatabaseModule } from './database/database.module';
+import { ChainModule } from './chain/chain.module';
+import { WalletsModule } from './wallets/wallets.module';
 
 @Module({
-  imports: [LoggerModule.forRoot(createConfig()), HealthModule],
+  imports: [LoggerModule.forRoot(createConfig()), DatabaseModule, HealthModule, ChainModule, WalletsModule],
   controllers: [AppController],
   providers: [
     {

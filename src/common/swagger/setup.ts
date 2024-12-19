@@ -30,7 +30,7 @@ export async function setupSwagger(app: INestApplication, version: string): Prom
     extraModels: [],
   });
 
-  SwaggerModule.setup('api', app, document, {
+  SwaggerModule.setup('api/docs', app, document, {
     swaggerOptions: {
       persistAuthorization: true,
       tagsSorter: 'alpha',

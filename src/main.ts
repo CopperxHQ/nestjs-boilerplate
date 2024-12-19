@@ -18,7 +18,7 @@ export async function bootstrap(): Promise<NestExpressApplication> {
     bodyParser: true,
     bufferLogs: true,
     cors: CONFIG.CORS,
-    logger: createLogger(),
+    // logger: createLogger(),
   });
 
   app.use(json({ limit: '10mb' }));

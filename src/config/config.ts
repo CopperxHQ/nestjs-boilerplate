@@ -46,8 +46,13 @@ const env = cleanEnv(process.env, {
 
   ORM_LOGGING_ENABLED: bool({ default: false, devDefault: false }),
   ORM_AUTO_MIGRATION: bool({ default: true, devDefault: false }),
+
+  // Circle Configuration
+  CIRCLE_API_URL: str({ default: 'https://api.circle.com' }),
+  CIRCLE_API_KEY: str({ default: undefined }),
+  CIRCLE_ENTITY_SECRET: str({ default: undefined }),
+  CIRCLE_ENTITY_PUBLIC_KEY: str({ default: undefined }),
+  CIRCLE_WALLET_SET_ID: str({ default: undefined }),
 });
 
-const AppConfig = () => ({ ...env });
-
-export const CONFIG = AppConfig();
+export const CONFIG = env;
