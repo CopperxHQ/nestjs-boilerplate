@@ -12,22 +12,22 @@ export enum ChainType {
 
 export enum EvmChainId {
   // Mainnets
-  Polygon = '137',
-  Ethereum = '1',
-  Arbitrum = '42161',
-  Base = '8453',
-  Optimism = '10',
-  Bsc = '56',
-  Solana = '1399811149',
+  // Polygon = '137',
+  // Ethereum = '1',
+  // Arbitrum = '42161',
+  // Base = '8453',
+  // Optimism = '10',
+  // Bsc = '56',
+  // Solana = '1399811149',
 
   // Testnets
   AmoyTestnet = '80002',
-  SepoliaTestnet = '11155111',
-  ArbitrumSepoliaTestnet = '421614',
-  BaseSepoliaTestnet = '84532',
-  OptimismSepoliaTestnet = '11155420',
-  BscTestnet = '97',
-  SolanaDevnetTestnet = '1399811150',
+  // SepoliaTestnet = '11155111',
+  // ArbitrumSepoliaTestnet = '421614',
+  // BaseSepoliaTestnet = '84532',
+  // OptimismSepoliaTestnet = '11155420',
+  // BscTestnet = '97',
+  // SolanaDevnetTestnet = '1399811150',
 }
 
 export type ChainId = EvmChainId;

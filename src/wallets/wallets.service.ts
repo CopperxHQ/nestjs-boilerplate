@@ -3,18 +3,20 @@ import { CreateWalletDto } from './dto/create-wallet.dto';
 import { UpdateWalletDto } from './dto/update-wallet.dto';
 import { WalletRepository } from 'src/database/repositories/wallet.repository';
 import { WalletAddressRepository } from 'src/database/repositories/wallet-address.repository';
+import { WalletProviderService } from './provider/provider.service';
 
 @Injectable()
 export class WalletsService {
   constructor(
     private readonly walletRepository: WalletRepository,
-    private readonly walletAddressRepository: WalletAddressRepository
+    private readonly walletAddressRepository: WalletAddressRepository,
+    private readonly walletProviderService: WalletProviderService
   ) {}
 
   create(createWalletDto: CreateWalletDto) {
     const wallet = this.walletRepository.create(createWalletDto);
-    // const wallets = this.walletProviderService.createWallets();
-    // console.log(wallets);
+    const wallets = this.walletProviderService.createWalletAddresses();
+    console.log(wallets);
     return 'This action adds a new wallet';
   }
 
