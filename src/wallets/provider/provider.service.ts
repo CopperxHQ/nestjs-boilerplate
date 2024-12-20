@@ -4,6 +4,8 @@ import { ChainId, EvmChainId } from 'src/database/entities/chain.entity';
 import { IWalletProvider } from './interfaces/wallet-provider.interface';
 import { EvmWalletService } from './evm/evm-wallet.service';
 import { ChainRepository } from 'src/database/repositories/chain.repository';
+import { WalletAddressOwner } from 'src/database/entities/wallet-address-owner.entity';
+import { WalletAddress } from 'src/database/entities/wallet-address.entity';
 
 @Injectable()
 export class WalletProviderService {
@@ -26,17 +28,22 @@ export class WalletProviderService {
     return provider;
   }
 
-  async createWalletAddresses() {
+  async createWalletAddresses(): Promise<WalletAddress[]> {
     const chainIds = [EvmChainId.SepoliaTestnet, EvmChainId.BaseSepoliaTestnet];
-    const promises = chainIds.map(async (chainId) => {
+    const evmSigners: WalletAddressOwner[] = [];
+    const walletAddresses: WalletAddress[] = [];
+
+    for (const chainId of chainIds) {
       const provider = await this.getProvider(chainId);
-      const walletAddresses = await provider.createWallet();
-      return walletAddresses;
-    });
+      const currentWalletAddresses = await provider.createWallet(evmSigners);
+      walletAddresses.push(currentWalletAddresses);
 
-    const walletAddresses = await Promise.all(promises);
+      if (evmSigners.length === 0) {
+        evmSigners.push(...currentWalletAddresses.owners);
+      }
+    }
 
-    return [walletAddresses];
+    return walletAddresses;
   }
 
   async createWallet(chainId: ChainId) {

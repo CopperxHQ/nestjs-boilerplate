@@ -29,6 +29,6 @@ export class Wallet extends AbstractSoftEntity {
   })
   autoFuel?: boolean;
 
-  @OneToMany(() => WalletAddress, (walletAddress) => walletAddress.wallet, { eager: true })
+  @OneToMany(() => WalletAddress, (walletAddress) => walletAddress.wallet, { eager: true, cascade: true })
   addresses: WalletAddress[];
 }

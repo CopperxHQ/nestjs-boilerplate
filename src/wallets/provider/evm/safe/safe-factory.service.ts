@@ -29,14 +29,11 @@ export class SafeFactory {
         safeVersion: SAFE_VERSION,
       },
     };
-    console.log('predictedSafe', getEVMRpcUrl(config.chainId));
 
     const safeFactory = await Safe.init({
       provider: getEVMRpcUrl(config.chainId),
       predictedSafe,
     });
-
-    console.log('safeFactory');
 
     return new SafeFactory(safeFactory);
   }
@@ -51,7 +48,6 @@ export class SafeFactory {
   }
 
   async predictAddress(): Promise<Address> {
-    console.log('predictAddress', await this.safeFactory.getChainId(), await this.safeFactory.getAddress());
     return this.safeFactory.getAddress();
   }
 }

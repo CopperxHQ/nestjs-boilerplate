@@ -1,4 +1,5 @@
 // import { Hex } from 'viem';
+import { WalletAddressOwner } from 'src/database/entities/wallet-address-owner.entity';
 import { WalletAddress } from 'src/database/entities/wallet-address.entity';
 
 // export type TokenBalance = {
@@ -18,7 +19,7 @@ export interface IWalletProvider {
   // Wallet management methods
   // ================================================
 
-  createWallet(): Promise<WalletAddress>;
+  createWallet(owners?: WalletAddressOwner[]): Promise<WalletAddress>;
   // deployWallet(organizationId: string, walletId: string, options?: any): Promise<WalletAddress>;
 
   // // ================================================

@@ -3,14 +3,14 @@ import { AbstractSoftEntity } from '../../common/entities/abstract-soft.entity';
 import { WalletAddress } from './wallet-address.entity';
 import { UuidColumn } from 'src/common/database/decorators/columns/Uuid';
 
-export enum SignerType {
+export enum OwnerType {
   Circle = 'circle',
   Fireblocks = 'fireblocks',
   Copper = 'copper',
-  // Add more signer types as needed
+  // Add more owner types as needed
 }
 
-export enum SignerStatus {
+export enum OwnerStatus {
   Pending = 'pending',
   Active = 'active',
   Failed = 'failed',
@@ -18,29 +18,29 @@ export enum SignerStatus {
 }
 
 @Entity()
-export class WalletAddressSigner extends AbstractSoftEntity {
+export class WalletAddressOwner extends AbstractSoftEntity {
   @UuidColumn()
   walletAddressId: string;
 
   @Column({
     type: 'enum',
-    enum: SignerType,
+    enum: OwnerType,
     nullable: false,
   })
-  type: SignerType;
+  type: OwnerType;
 
   @Column()
-  signerId: string;
+  ownerId: string;
 
   @Column()
   address: string;
 
   @Column({
     type: 'enum',
-    enum: SignerStatus,
-    default: SignerStatus.Pending,
+    enum: OwnerStatus,
+    default: OwnerStatus.Pending,
   })
-  status: SignerStatus;
+  status: OwnerStatus;
 
   @Column({
     type: 'json',
@@ -50,7 +50,7 @@ export class WalletAddressSigner extends AbstractSoftEntity {
   metadata?: Record<string, any>;
 
   // Relationships
-  @ManyToOne(() => WalletAddress, (walletAddress) => walletAddress.signers, { onDelete: 'CASCADE' })
+  @ManyToOne(() => WalletAddress, (walletAddress) => walletAddress.owners, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'walletAddressId' })
   walletAddress: WalletAddress;
 }

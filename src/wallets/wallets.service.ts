@@ -4,6 +4,7 @@ import { UpdateWalletDto } from './dto/update-wallet.dto';
 import { WalletRepository } from 'src/database/repositories/wallet.repository';
 import { WalletAddressRepository } from 'src/database/repositories/wallet-address.repository';
 import { WalletProviderService } from './provider/provider.service';
+import { Wallet } from 'src/database/entities/wallet.entity';
 
 @Injectable()
 export class WalletsService {
@@ -14,10 +15,16 @@ export class WalletsService {
   ) {}
 
   async create(createWalletDto: CreateWalletDto) {
-    const wallet = await this.walletRepository.create(createWalletDto);
-    const wallets = await this.walletProviderService.createWalletAddresses();
-    console.log(wallet, wallets);
-    return 'This action adds a new wallet';
+    const walletAddresses = await this.walletProviderService.createWalletAddresses();
+
+    const wallet = new Wallet();
+    wallet.name = createWalletDto.name;
+    wallet.customerRefId = createWalletDto.customerRefId;
+    wallet.addresses = walletAddresses;
+
+    await this.walletRepository.save(wallet);
+
+    return wallet;
   }
 
   findAll() {

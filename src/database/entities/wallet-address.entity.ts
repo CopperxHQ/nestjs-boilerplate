@@ -3,7 +3,7 @@ import { AbstractSoftEntity } from '../../common/entities/abstract-soft.entity';
 import { Chain } from './chain.entity';
 import { UuidColumn } from 'src/common/database/decorators/columns/Uuid';
 import { Wallet } from './wallet.entity';
-import { WalletAddressSigner } from './wallet-address-signer.entity';
+import { WalletAddressOwner } from './wallet-address-owner.entity';
 
 export enum WalletStatus {
   Pending = 'pending', // Pending message not wallet is not yet created. But only predicted
@@ -52,8 +52,8 @@ export class WalletAddress extends AbstractSoftEntity {
   @JoinColumn({ name: 'walletId' })
   wallet?: Wallet;
 
-  @OneToMany(() => WalletAddressSigner, (signer) => signer.walletAddress)
-  signers?: WalletAddressSigner[];
+  @OneToMany(() => WalletAddressOwner, (owner) => owner.walletAddress, { cascade: true })
+  owners?: WalletAddressOwner[];
 }
 
 export interface IWalletData {
