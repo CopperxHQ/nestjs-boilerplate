@@ -3,29 +3,39 @@ import { Injectable, Logger } from '@nestjs/common';
 import { ChainId, EvmChainId } from 'src/database/entities/chain.entity';
 import { IWalletProvider } from './interfaces/wallet-provider.interface';
 import { EvmWalletService } from './evm/evm-wallet.service';
+import { ChainRepository } from 'src/database/repositories/chain.repository';
 
 @Injectable()
 export class WalletProviderService {
-  private readonly providers: Record<ChainId, IWalletProvider> = {
-    [EvmChainId.AmoyTestnet]: new EvmWalletService(EvmChainId.AmoyTestnet),
-  };
+  private providers: { [ChainId: string]: IWalletProvider } = {};
 
-  constructor() {}
+  constructor(private readonly chainRepository: ChainRepository) {}
 
-  async getProvider(id: string) {
+  async getProvider(id: ChainId) {
+    if (Object.keys(this.providers).length === 0) {
+      const chains = await this.chainRepository.find();
+
+      for (const chain of chains) {
+        this.providers[chain.chainId] = new EvmWalletService(chain);
+      }
+
+      Logger.debug('Chain and provider initialized');
+    }
+
     const provider = this.providers[id];
     return provider;
   }
 
   async createWalletAddresses() {
-    // Create wallet addresses for evm chains
-    const walletAddresses = await this.providers[EvmChainId.AmoyTestnet].createWallet();
-    console.log(walletAddresses);
+    const chainIds = [EvmChainId.SepoliaTestnet, EvmChainId.BaseSepoliaTestnet];
+    const promises = chainIds.map(async (chainId) => {
+      const provider = await this.getProvider(chainId);
+      const walletAddresses = await provider.createWallet();
+      return walletAddresses;
+    });
 
-    // const wallets = Object.keys(this.providers).map((chainId) =>
-    //   this.providers[chainId].createWallet(chainId)
-    // );
-    // Logger.log(wallets);
+    const walletAddresses = await Promise.all(promises);
+
     return [walletAddresses];
   }
 

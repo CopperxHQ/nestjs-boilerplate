@@ -13,10 +13,10 @@ export class WalletsService {
     private readonly walletProviderService: WalletProviderService
   ) {}
 
-  create(createWalletDto: CreateWalletDto) {
-    const wallet = this.walletRepository.create(createWalletDto);
-    const wallets = this.walletProviderService.createWalletAddresses();
-    console.log(wallets);
+  async create(createWalletDto: CreateWalletDto) {
+    const wallet = await this.walletRepository.create(createWalletDto);
+    const wallets = await this.walletProviderService.createWalletAddresses();
+    console.log(wallet, wallets);
     return 'This action adds a new wallet';
   }
 

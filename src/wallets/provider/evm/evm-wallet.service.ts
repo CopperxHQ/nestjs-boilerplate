@@ -1,10 +1,12 @@
 import { Injectable } from '@nestjs/common';
+import { Address } from 'viem';
 
 import { IWalletProvider } from '../interfaces/wallet-provider.interface';
 import { WalletAddress, WalletStatus } from 'src/database/entities/wallet-address.entity';
-import { ChainId, EvmChainId } from 'src/database/entities/chain.entity';
+import { Chain, ChainId, EvmChainId } from 'src/database/entities/chain.entity';
 import { CircleClient } from '../signers/circle-client';
 import { SignerType, WalletAddressSigner } from 'src/database/entities/wallet-address-signer.entity';
+import { SafeFactory } from './safe/safe-factory.service';
 
 @Injectable()
 export class EvmWalletService implements IWalletProvider {
@@ -15,11 +17,12 @@ export class EvmWalletService implements IWalletProvider {
 
   private static readonly supportedChains = Object.values(EvmChainId);
 
-  constructor(chainId: ChainId) {
-    this.chainId = chainId;
+  constructor(chain: Chain) {
+    this.chainId = chain.chainId;
 
+    console.log('chainId', typeof this.chainId, this.chainId);
     // this.relayer = RelayerServiceFactory.relayer();
-    this.circleClient = new CircleClient(chainId);
+    this.circleClient = new CircleClient(chain.chainId);
   }
 
   static getSupportedChains(): ChainId[] {
@@ -73,13 +76,14 @@ export class EvmWalletService implements IWalletProvider {
   }
 
   async computeSafeAddress(walletAddress: WalletAddress): Promise<string> {
-    return '0x0000000000000000000000000000000000000001';
-    // const account = await toSafeSmartAccount({
-    //   client,
-    //   owners: walletAddress.signers.map((signer) => signer.address) as Address[],
-    //   version: '1.4.1',
-    // });
+    const account = await SafeFactory.create({
+      owners: walletAddress.signers.map((signer) => signer.address) as Address[],
+      threshold: 1,
+      chainId: this.chainId,
+    });
 
-    // return account.address;
+    const address = await account.predictAddress();
+
+    return address;
   }
 }

@@ -21,10 +21,10 @@ export enum EvmChainId {
   // Solana = '1399811149',
 
   // Testnets
-  AmoyTestnet = '80002',
-  // SepoliaTestnet = '11155111',
+  // AmoyTestnet = '80002',
+  SepoliaTestnet = '11155111',
   // ArbitrumSepoliaTestnet = '421614',
-  // BaseSepoliaTestnet = '84532',
+  BaseSepoliaTestnet = '84532',
   // OptimismSepoliaTestnet = '11155420',
   // BscTestnet = '97',
   // SolanaDevnetTestnet = '1399811150',
@@ -39,7 +39,7 @@ export class Chain extends AbstractEntity {
   type: ChainType;
 
   // Native chain id of a particular blockchain
-  @Column({ type: 'int', transformer: NumberTransformer })
+  @Column()
   chainId: ChainId;
 
   @Column()
